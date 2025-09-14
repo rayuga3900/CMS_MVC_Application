@@ -1,0 +1,19 @@
+Options -Multiviews
+RewriteEngine On
+
+# Redirect all requests to index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+
+
+#this file is helpful in URL rewriting(creating clean and user-friendly URLs)
+#It also help restrict access to specific files
+# Also useful in managing the cache 
+# Helpful in setting permanent and temporary redirects
+# Comments:
+# - `Options -MultiViews` prevents Apache from guessing file extensions (e.g., serving `about.php` for `/about`)
+# - `RewriteEngine On` enables mod_rewrite
+# - Conditions:
+#   - Don't rewrite if the file (`-f`) or directory (`-d`) actually exists
+# - `RewriteRule` forwards everything to `index.php`, adding the path as `$_GET['url']`
